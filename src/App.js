@@ -1,23 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import Button from './button';
+import Modal from './modal';
+import React, { useState } from 'react';
+import Segment from './segment';
 
 function App() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Button onClick={handleClick}>Save Segment</Button>
+      {isModalOpen && (
+        <Modal onBack={handleCloseModal} title="Saving Segment">
+          <Segment closeModal={handleCloseModal}/>
+        </Modal>
+      )}
     </div>
   );
 }
